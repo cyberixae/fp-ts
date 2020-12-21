@@ -681,6 +681,20 @@ describe('ReadonlyArray', () => {
     assert.deepStrictEqual(_.intersperse(0)([1, 2, 3, 4]), [1, 0, 2, 0, 3, 0, 4])
   })
 
+  it('blend', () => {
+    const empty: ReadonlyArray<number> = []
+    assert.deepStrictEqual(pipe([1, 2, 3], _.blend([4, 5, 6, 7])), [1, 4, 2, 5, 3, 6, 7])
+    assert.deepStrictEqual(pipe([], _.blend([])), [])
+    assert.deepStrictEqual(pipe([1], _.blend(empty)), [1])
+    assert.deepStrictEqual(pipe([], _.blend([1])), [1])
+    assert.deepStrictEqual(pipe([1], _.blend([2])), [1, 2])
+    assert.deepStrictEqual(pipe([1], _.blend([2, 3])), [1, 2, 3])
+    assert.deepStrictEqual(pipe([1, 2], _.blend([3])), [1, 3, 2])
+    assert.deepStrictEqual(pipe([1, 2], _.blend([3, 4])), [1, 3, 2, 4])
+    assert.deepStrictEqual(pipe([1, 2, 3], _.blend([4])), [1, 4, 2, 3])
+    assert.deepStrictEqual(pipe([1], _.blend([2, 3, 4])), [1, 2, 3, 4])
+  })
+
   it('rotate', () => {
     assert.deepStrictEqual(_.rotate(1)([]), [])
     assert.deepStrictEqual(_.rotate(1)([1]), [1])

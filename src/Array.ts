@@ -752,6 +752,22 @@ export const prependToAll: <A>(e: A) => (xs: Array<A>) => Array<A> = RA.prependT
 export const intersperse: <A>(e: A) => (as: Array<A>) => Array<A> = RA.intersperse as any
 
 /**
+ * Merge two arrays into one by alternating elements from each array
+ *
+ * @example
+ * import { blend } from 'fp-ts/Array'
+ *
+ * assert.deepStrictEqual(blend([4, 5, 6, 7])([1, 2, 3]), [1, 4, 2, 5, 3, 6, 7])
+ *
+ * @category combinators
+ * @since 2.10.0
+ */
+export const blend: {
+  <A>(es: NonEmptyArray<A>): (as: Array<A>) => NonEmptyArray<A>
+  <A>(es: Array<A>): (as: Array<A>) => Array<A>
+} = RA.blend as any
+
+/**
  * Rotate an array to the right by `n` steps
  *
  * @example

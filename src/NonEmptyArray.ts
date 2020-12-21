@@ -370,6 +370,19 @@ export const prependToAll: <A>(e: A) => (xs: NonEmptyArray<A>) => NonEmptyArray<
  */
 export const intersperse: <A>(e: A) => (as: NonEmptyArray<A>) => NonEmptyArray<A> = RNEA.intersperse as any
 
+/**
+ * Merge two arrays into one by alternating elements from each array
+ *
+ * @example
+ * import { blend } from 'fp-ts/NonEmptyArray'
+ *
+ * assert.deepStrictEqual(blend([4, 5, 6, 7])([1, 2, 3]), [1, 4, 2, 5, 3, 6, 7])
+ *
+ * @category combinators
+ * @since 2.10.0
+ */
+export const blend: <A>(es: Array<A>) => (as: NonEmptyArray<A>) => NonEmptyArray<A> = RNEA.blend as any
+
 // -------------------------------------------------------------------------------------
 // non-pipeables
 // -------------------------------------------------------------------------------------

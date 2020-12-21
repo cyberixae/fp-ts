@@ -441,6 +441,21 @@ export const intersperse: <A>(
   e: A
 ) => (as: ReadonlyNonEmptyArray<A>) => ReadonlyNonEmptyArray<A> = RA.intersperse as any
 
+/**
+ * Merge two arrays into one by alternating elements from each array
+ *
+ * @example
+ * import { blend } from 'fp-ts/ReadonlyNonEmptyArray'
+ *
+ * assert.deepStrictEqual(blend([4, 5, 6, 7])([1, 2, 3]), [1, 4, 2, 5, 3, 6, 7])
+ *
+ * @category combinators
+ * @since 2.10.0
+ */
+export const blend: <A>(
+  es: ReadonlyArray<A>
+) => (as: ReadonlyNonEmptyArray<A>) => ReadonlyNonEmptyArray<A> = RA.blend as any
+
 // -------------------------------------------------------------------------------------
 // non-pipeables
 // -------------------------------------------------------------------------------------

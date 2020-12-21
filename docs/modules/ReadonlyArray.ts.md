@@ -63,6 +63,7 @@ Added in v2.5.0
 - [combinators](#combinators)
   - [apFirst](#apfirst)
   - [apSecond](#apsecond)
+  - [blend](#blend)
   - [chainFirst](#chainfirst)
   - [chop](#chop)
   - [difference](#difference)
@@ -579,6 +580,27 @@ export declare const apSecond: <B>(fb: readonly B[]) => <A>(fa: readonly A[]) =>
 ```
 
 Added in v2.5.0
+
+## blend
+
+Merge two arrays into one by alternating elements from each array
+
+**Signature**
+
+```ts
+export declare function blend<A>(es: ReadonlyNonEmptyArray<A>): (as: ReadonlyArray<A>) => ReadonlyNonEmptyArray<A>
+export declare function blend<A>(es: ReadonlyArray<A>): (as: ReadonlyArray<A>) => ReadonlyArray<A>
+```
+
+**Example**
+
+```ts
+import { blend } from 'fp-ts/ReadonlyArray'
+
+assert.deepStrictEqual(blend([4, 5, 6, 7])([1, 2, 3]), [1, 4, 2, 5, 3, 6, 7])
+```
+
+Added in v2.10.0
 
 ## chainFirst
 

@@ -40,6 +40,7 @@ Added in v2.0.0
 - [combinators](#combinators)
   - [apFirst](#apfirst)
   - [apSecond](#apsecond)
+  - [blend](#blend)
   - [chainFirst](#chainfirst)
   - [copy](#copy)
   - [duplicate](#duplicate)
@@ -308,6 +309,26 @@ export declare const apSecond: <B>(fb: NonEmptyArray<B>) => <A>(fa: NonEmptyArra
 ```
 
 Added in v2.0.0
+
+## blend
+
+Merge two arrays into one by alternating elements from each array
+
+**Signature**
+
+```ts
+export declare const blend: <A>(es: A[]) => (as: NonEmptyArray<A>) => NonEmptyArray<A>
+```
+
+**Example**
+
+```ts
+import { blend } from 'fp-ts/NonEmptyArray'
+
+assert.deepStrictEqual(blend([4, 5, 6, 7])([1, 2, 3]), [1, 4, 2, 5, 3, 6, 7])
+```
+
+Added in v2.10.0
 
 ## chainFirst
 

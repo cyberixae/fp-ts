@@ -1094,6 +1094,47 @@ export function intersperse<A>(e: A): (as: ReadonlyArray<A>) => ReadonlyArray<A>
 }
 
 /**
+ * Merge two arrays into one by alternating elements from each array
+ *
+ * @example
+ * import { blend } from 'fp-ts/ReadonlyArray'
+ *
+ * assert.deepStrictEqual(blend([4, 5, 6, 7])([1, 2, 3]), [1, 4, 2, 5, 3, 6, 7])
+ *
+ * @category combinators
+ * @since 2.10.0
+ */
+export function blend<A>(es: ReadonlyNonEmptyArray<A>): (as: ReadonlyArray<A>) => ReadonlyNonEmptyArray<A>
+export function blend<A>(es: ReadonlyArray<A>): (as: ReadonlyArray<A>) => ReadonlyArray<A>
+export function blend<A>(es: ReadonlyArray<A>): (as: ReadonlyArray<A>) => ReadonlyArray<A> {
+  return (as) => {
+    const aLen = as.length
+    if (aLen === 0) {
+      return es
+    }
+    const eLen = es.length
+    const overlapLen = Math.min(aLen, eLen)
+    const tempLen = 2 * overlapLen
+    const temp = Array(tempLen)
+    let i = 0
+    for (; i < overlapLen; i++) {
+      const offset = 2 * i
+      temp[offset] = as[i]
+      temp[offset + 1] = es[i]
+    }
+    if (eLen > aLen) {
+      const eTail = es.slice(overlapLen)
+      return temp.concat(eTail)
+    }
+    if (aLen > eLen) {
+      const aTail = as.slice(overlapLen)
+      return temp.concat(aTail)
+    }
+    return temp
+  }
+}
+
+/**
  * Rotate an array to the right by `n` steps
  *
  * @example
